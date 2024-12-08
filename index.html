@@ -1,9 +1,43 @@
 <!DOCTYPE html>
-<html>
-    <title> About me</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alessandro Perego, Ph.D.</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>About Me</h1>
-    <p>My name is Alessandro Perego</p>
+    <header>
+        <h1>Alessandro Perego, Ph.D.</h1>
+        <nav>
+            <ul>
+                <li><a href="#" class="tab-link" data-tab="bio">Bio</a></li>
+                <li><a href="#" class="tab-link" data-tab="github">GitHub</a></li>
+                <li><a href="#" class="tab-link" data-tab="links">Links</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="bio" class="tab-content">
+            <h2>Bio</h2>
+            <p>This is where your biography goes. You can include your professional background, research interests, and skills.</p>
+        </section>
+        <section id="github" class="tab-content hidden">
+            <h2>GitHub Repositories</h2>
+            <p>List of GitHub repositories will appear here.</p>
+        </section>
+        <section id="links" class="tab-content hidden">
+            <h2>Links</h2>
+            <ul>
+                <li><a href="https://www.linkedin.com/in/alessandro-perego-ph-d-aa61baa2/" target="_blank">LinkedIn</a></li>
+                <li><a href="https://scholar.google.com/citations?user=hEt0jeAAAAAJ&hl=en" target="_blank">Google Scholar</a></li>
+                <li><a href="https://github.com/aperego" target="_blank">GitHub</a></li>
+            </ul>
+        </section>
+    </main>
+    <footer>
+        <p>© 2024 Alessandro Perego, Ph.D.</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
