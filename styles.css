@@ -1,6 +1,15 @@
+/* ==========================================================================
+   Alessandro Perego — Dark “early-2000s intranet” (professional + unique)
+   + Light theme (white/black/light-blue) via CSS variables
+   ========================================================================== */
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
 :root{
+  /* ---------------------------
+     DARK THEME (keep)
+     --------------------------- */
+
   /* Backgrounds */
   --bg: #0b0f14;        /* page background */
   --panel: #0f1621;     /* sidebar panel */
@@ -8,7 +17,7 @@
   --header: #101a26;    /* header */
   --header2: #0c121a;   /* header gradient */
 
-  /* Borders (visible, 2000s-ish) */
+  /* Borders */
   --line: #223246;
   --lineDark: #314862;
 
@@ -16,16 +25,25 @@
   --text: #e7eef7;
   --muted: #a8b4c4;
 
-  /* Accent (unique but professional) */
+  /* Accent */
   --accent: #2dd4bf;     /* teal */
-  --accent2: #a3ffcf;    /* minty highlight for hover */
+  --accent2: #a3ffcf;    /* mint hover */
+
+  /* UI element colors */
+  --navItemBg: #0a1119;
+  --navItemHoverBg: #0b1520;
+  --navItemHoverBorder: rgba(45, 212, 191, 0.45);
+
+  --toggleBg: rgba(255,255,255,0.03);
+  --toggleHoverBg: rgba(45, 212, 191, 0.08);
+  --toggleBorder: var(--lineDark);
 
   /* Layout */
-  --wrap: 100%;          /* FULL WIDTH (was 980px) */
-  --pad: 14px;           /* left gutter padding */
-  --radius: 0px;         /* keep it sharp (2000s) */
+  --wrap: 100%;
+  --pad: 14px;
+  --radius: 0px;
 
-  /* Shadows/glow */
+  /* Shadows */
   --shadow: 0 0 0 1px rgba(45, 212, 191, 0.06), 0 14px 40px rgba(0,0,0,0.55);
   --shadow2: 0 0 0 1px rgba(45, 212, 191, 0.10), 0 18px 60px rgba(0,0,0,0.62);
 }
@@ -42,7 +60,7 @@ body{
   font-size: 15px;
 }
 
-/* Subtle “scanline” texture (very light; remove if you dislike) */
+/* Subtle scanlines (dark only; light theme turns off below) */
 body::before{
   content: "";
   position: fixed;
@@ -60,7 +78,7 @@ body::before{
   mix-blend-mode: overlay;
 }
 
-/* Links (classic underline, modern color) */
+/* Links */
 a{
   color: var(--accent);
   text-decoration: underline;
@@ -68,18 +86,18 @@ a{
 }
 a:hover{ color: var(--accent2); }
 
-/* Header bar */
+/* Header */
 header{
   background: linear-gradient(to bottom, var(--header), var(--header2));
   border-top: 1px solid var(--lineDark);
   border-bottom: 2px solid var(--lineDark);
 }
 
-/* UPDATE: flush-left (no auto-centering) */
 header .wrap{
   max-width: var(--wrap);
-  margin: 0;                 /* was: 0 auto */
+  margin: 0;
   padding: 14px var(--pad);
+  position: relative;
 }
 
 header h1{
@@ -95,11 +113,48 @@ header .subtitle{
   font-size: 13px;
 }
 
+/* Theme toggle button (top-right) — icon only */
+.theme-toggle{
+  position: absolute;
+  top: 10px;
+  right: 10px;
+
+  width: 38px;
+  height: 32px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  border: 1px solid var(--toggleBorder);
+  background: var(--toggleBg);
+  color: var(--text);
+
+  font: inherit;
+  cursor: pointer;
+}
+
+.theme-toggle:hover{
+  border-color: rgba(45, 212, 191, 0.55);
+  color: var(--accent2);
+  background: var(--toggleHoverBg);
+}
+
+.theme-toggle:focus{
+  outline: 2px solid rgba(45, 212, 191, 0.6);
+  outline-offset: 2px;
+}
+
+.theme-toggle__icon{
+  font-size: 16px;
+  line-height: 1;
+}
+
 /* Main */
-/* UPDATE: flush-left (no auto-centering) */
 main{
   max-width: var(--wrap);
-  margin: 16px 0 24px;       /* was: 16px auto 24px */
+  margin: 16px 0 24px;
   padding: 0 var(--pad);
 }
 
@@ -113,7 +168,7 @@ main{
   .layout{ grid-template-columns: 1fr; }
 }
 
-/* Sidebar (left nav) */
+/* Sidebar */
 .sidebar{
   background: linear-gradient(to bottom, var(--panel), #0b111a);
   border: 2px solid var(--line);
@@ -131,7 +186,7 @@ main{
   border-bottom: 1px solid var(--line);
 }
 
-/* Nav list */
+/* Nav */
 .nav{
   list-style: none;
   margin: 10px 0 0 0;
@@ -142,15 +197,15 @@ main{
   display: block;
   padding: 8px 10px;
   margin: 6px 0;
-  background: #0a1119;
+  background: var(--navItemBg);
   border: 1px solid var(--line);
-  text-decoration: none; /* nav items not underlined */
+  text-decoration: none;
   color: var(--text);
 }
 
 .nav a:hover{
-  border-color: rgba(45, 212, 191, 0.45);
-  background: #0b1520;
+  border-color: var(--navItemHoverBorder);
+  background: var(--navItemHoverBg);
   color: var(--accent2);
 }
 
@@ -162,7 +217,7 @@ main{
   box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.12) inset;
 }
 
-/* Content panel */
+/* Content */
 .content{
   background: linear-gradient(to bottom, var(--panel2), #0a1017);
   border: 2px solid var(--line);
@@ -171,7 +226,6 @@ main{
   padding: 14px 16px;
 }
 
-/* Headings */
 .content h2{
   margin: 0 0 10px 0;
   font-size: 16px;
@@ -187,22 +241,16 @@ main{
   color: var(--muted);
 }
 
-/* Paragraph spacing */
-.content p{
-  margin: 0 0 12px 0;
-}
+.content p{ margin: 0 0 12px 0; }
 
-/* Lists */
 .content ul{
   margin: 8px 0 0 18px;
   padding: 0;
 }
 
-.content li{
-  margin: 6px 0;
-}
+.content li{ margin: 6px 0; }
 
-/* Info box (like a “callout” in old UIs) */
+/* Info box */
 .info-box{
   margin: 12px 0 14px;
   padding: 10px 12px;
@@ -210,7 +258,7 @@ main{
   border: 1px solid rgba(45, 212, 191, 0.35);
 }
 
-/* Key/Value block */
+/* KV */
 .kv{
   display: grid;
   grid-template-columns: 120px 1fr;
@@ -222,27 +270,7 @@ main{
   font-size: 13px;
 }
 
-/* Footer */
-/* UPDATE: flush-left (no auto-centering) */
-footer{
-  max-width: var(--wrap);
-  margin: 0 0 26px;          /* was: 0 auto 26px */
-  padding: 0 var(--pad);
-  color: var(--muted);
-  font-size: 12px;
-}
-
-footer .wrap{
-  border-top: 1px solid var(--line);
-  padding-top: 10px;
-}
-
-/* Optional: make the whole site feel “snappier” */
-@media (prefers-reduced-motion: no-preference){
-  .sidebar, .content{ transition: box-shadow 180ms ease, border-color 180ms ease; }
-  .sidebar:hover, .content:hover{ box-shadow: var(--shadow2); }
-}
-/* --- Writing page: publication cards --- */
+/* Publication cards */
 .pub-card{
   border: 1px solid rgba(45, 212, 191, 0.35);
   background: rgba(255, 255, 255, 0.02);
@@ -263,12 +291,88 @@ footer .wrap{
   font-size: 13px;
 }
 
-.pub-abstract{
-  margin: 0;
-}
-
+.pub-abstract{ margin: 0; }
 .pub-links{
   margin-top: 8px;
   font-size: 13px;
   color: var(--muted);
+}
+
+/* Footer */
+footer{
+  max-width: var(--wrap);
+  margin: 0 0 26px;
+  padding: 0 var(--pad);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+footer .wrap{
+  border-top: 1px solid var(--line);
+  padding-top: 10px;
+}
+
+/* Hover polish */
+@media (prefers-reduced-motion: no-preference){
+  .sidebar, .content{ transition: box-shadow 180ms ease, border-color 180ms ease; }
+  .sidebar:hover, .content:hover{ box-shadow: var(--shadow2); }
+}
+
+/* =========================
+   LIGHT THEME (white/black/light-blue) — clean, modern, readable
+   No dark overlays.
+   ========================= */
+body.theme-light{
+  /* Surfaces */
+  --bg: #ffffff;
+  --panel: #f7fafc;
+  --panel2: #ffffff;
+  --header: #ffffff;
+  --header2: #f6f9ff;
+
+  /* Borders */
+  --line: #d6e2f0;
+  --lineDark: #c3d4ea;
+
+  /* Text */
+  --text: #0b0f1a;     /* near-black */
+  --muted: #334155;    /* slate */
+
+  /* Accent (light blue) */
+  --accent: #2563eb;
+  --accent2: #1d4ed8;
+
+  /* Nav + toggle */
+  --navItemBg: #ffffff;
+  --navItemHoverBg: #eff6ff;
+  --navItemHoverBorder: #93c5fd;
+
+  --toggleBg: #ffffff;
+  --toggleHoverBg: #eff6ff;
+  --toggleBorder: var(--lineDark);
+
+  /* Shadows: light + crisp */
+  --shadow: 0 0 0 1px rgba(2, 6, 23, 0.06), 0 8px 24px rgba(2, 6, 23, 0.06);
+  --shadow2: 0 0 0 1px rgba(2, 6, 23, 0.08), 0 12px 34px rgba(2, 6, 23, 0.08);
+}
+
+/* Turn OFF scanlines in light mode */
+body.theme-light::before{
+  opacity: 0;
+}
+
+/* Light mode: remove dark gradients (pure clean panels) */
+body.theme-light .sidebar{ background: #ffffff; }
+body.theme-light .content{ background: #ffffff; }
+
+/* Light mode: info-box becomes light blue */
+body.theme-light .info-box{
+  background: #eff6ff;
+  border: 1px solid #93c5fd;
+}
+
+/* Light mode: publication cards */
+body.theme-light .pub-card{
+  background: #ffffff;
+  border: 1px solid #93c5fd;
 }

@@ -1,23 +1,42 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const tabs = document.querySelectorAll(".tab-link");
-    const tabContents = document.querySelectorAll(".tab-content");
+  // ---------------------------
+  // Nav active link highlight
+  // ---------------------------
+  const path = window.location.pathname.split("/").pop() || "index.html";
+  document.querySelectorAll(".nav a").forEach((a) => {
+    const href = a.getAttribute("href");
+    if (href === path) a.classList.add("active");
+  });
 
-    tabs.forEach(tab => {
-        tab.addEventListener("click", event => {
-            event.preventDefault();
+  // ---------------------------
+  // Theme toggle (dark <-> light) with persistence
+  // ---------------------------
+  const btn = document.getElementById("themeToggle");
+  const STORAGE_KEY = "ap_theme"; // "dark" | "light"
 
-            // Hide all tab contents
-            tabContents.forEach(content => content.classList.add("hidden"));
+  function setTheme(mode) {
+    if (mode === "light") document.body.classList.add("theme-light");
+    else document.body.classList.remove("theme-light");
 
-            // Remove active class from all tabs
-            tabs.forEach(t => t.classList.remove("active"));
+    localStorage.setItem(STORAGE_KEY, mode);
 
-            // Show the clicked tab's content
-            const targetTab = event.target.dataset.tab;
-            document.getElementById(targetTab).classList.remove("hidden");
+    if (btn) {
+      const iconEl = btn.querySelector(".theme-toggle__icon");
+      if (iconEl) iconEl.textContent = (mode === "light") ? "◑" : "◐";
+      btn.setAttribute(
+        "aria-label",
+        `Switch to ${mode === "dark" ? "dark" : "light"} theme`
+      );
+    }
+  }
 
-            // Add active class to the clicked tab
-            event.target.classList.add("active");
-        });
+  const saved = localStorage.getItem(STORAGE_KEY);
+  setTheme(saved === "light" ? "light" : "dark");
+
+  if (btn) {
+    btn.addEventListener("click", () => {
+      const isLight = document.body.classList.contains("theme-light");
+      setTheme(isLight ? "dark" : "light");
     });
+  }
 });
